@@ -1,0 +1,15 @@
+# PROG
+
+	int recebeESoma(int a, int b) {
+		int soma = 0;
+		int maior = a;
+		int menor = b+1;
+		if (b > a) {
+			maior = b;
+			menor = a+1;
+		}
+		for (int x = menor; x < maior; x++) {
+			soma += x;
+		}
+		return soma;
+	}
