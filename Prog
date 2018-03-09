@@ -1,0 +1,123 @@
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.nio.file.DirectoryStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
+import java.nio.file.attribute.BasicFileAttributes;
+
+/**
+ *
+ * @author marcel
+ */
+public class ExeSlide15 {
+
+    public static void main(String[] args) throws IOException {
+        /*
+        Path atual = Paths.get("");
+        atual = atual.toAbsolutePath();
+
+        System.out.println(atual);
+        boolean t = Files.isDirectory(atual);
+        System.out.println("É diretório " + (t ? "Sim" : "Não"));
+        System.out.format("Tamanho: %d %n", Files.size(atual));
+        System.out.println("ProprietÃ¡rio: " + Files.getOwner(atual).getName());
+        System.out.format("getFileName: %s%n", atual.getFileName());
+        System.out.format("getName(0): %s%n", atual.getName(0));
+        System.out.format("getNameCount: %d%n", atual.getNameCount());
+        System.out.format("subpath(0,2): %s%n", atual.subpath(0, 2));
+        System.out.format("getParent: %s%n", atual.getParent());
+        System.out.format("getRoot: %s%n", atual.getRoot());
+
+        System.out.println("\nAtributos ---->");
+        BasicFileAttributes attrs = Files.readAttributes(atual, BasicFileAttributes.class);
+        System.out.println("Diretorio? " + attrs.isDirectory());
+        System.out.println("Ãšltimo acesso:" + attrs.lastAccessTime());
+        System.out.println("Modificado em:" + attrs.lastModifiedTime());
+        System.out.println("Tamanho:" + attrs.size());
+
+        System.out.println("\nConteúdo do diretório:");
+        DirectoryStream<Path> stream = Files.newDirectoryStream(atual);
+        for (Path p : stream) {
+            System.out.println(p.getFileName());
+        }
+
+        Path arquivo = Paths.get("teste.txt");
+        Files.deleteIfExists(arquivo);
+        Files.createFile(arquivo);
+
+        Path diretorio = Paths.get("teste");
+        if (!Files.exists(diretorio)) {
+            Files.createDirectory(diretorio);
+        }
+
+        Path novo = diretorio.resolve(arquivo);
+        Files.move(arquivo, novo, REPLACE_EXISTING);
+
+        FileWriter arqTexto = new FileWriter("Texto12345.txt");
+        arqTexto.write("12345");
+        arqTexto.close();
+
+        DataOutputStream arqBin = new DataOutputStream(new FileOutputStream("Binario12345.dat"));
+        arqBin.writeInt(12345);
+        arqBin.close();
+
+        BufferedReader arq1 = new BufferedReader(new FileReader("Texto12345.txt"));
+        System.out.println("Lendo string em texto: " + arq1.readLine());
+        arq1.close();
+        arq1 = new BufferedReader(new FileReader("Binario12345.dat"));
+        System.out.println("Lendo string em binário: " + arq1.readLine());
+        arq1.close();
+
+        DataInputStream arq2 = new DataInputStream(new FileInputStream("Texto12345.txt"));
+        System.out.println("Lendo int em texto: " + arq2.readInt());
+        arq2.close();
+        arq2 = new DataInputStream(new FileInputStream("Binario12345.dat"));
+        System.out.println("Lendo int em binário: " + arq2.readInt());
+         */
+
+        //FileWriter arqLeitor = new FileWriter("criptografia.txt");
+        //arqLeitor.write("teste xjdegv");
+        //arqLeitor.close();
+        FileReader arqTeste = new FileReader("criptografia.txt");
+
+        int escrito = arqTeste.read();
+        int j;
+        int umavariavel = 7; //altera a Int
+
+        while (escrito != -1) {
+
+            System.out.print(escrito + "/");
+
+            j = escrito + umavariavel;
+            if (j > 126) { //se for maior que 126 (tabela ASCII, irá reinciar para a primeira letra imprimivel e somara o excesso)
+
+                int t = j - 126;
+                j = 31 + t;
+
+                escrito = arqTeste.read();
+
+            }
+
+            System.out.print(j + "-");
+            System.out.print((char) (j) + "\n");
+
+            escrito = arqTeste.read();
+
+        }
+
+    }
+}
